@@ -525,7 +525,7 @@
 <div id="checkoutModal" class="modal">
     <div class="modal-content">
         <h3>📦 完成订单</h3>
-        <label>收货地址</label>
+        <label>请您填写姓名＋电话＋收货地址</label>
         <textarea id="addressInput" class="address-input" rows="2" placeholder="姓名 / 电话 / 详细地址"></textarea>
         <div id="secureQrArea" class="qr-preview">
             <div>🔐 加载商家收款码...</div>
@@ -562,9 +562,9 @@
     let currentCategory = "incense";
 
     // 安全收款码（防篡改）
-    let secureQRUrl = "https://picsum.photos/id/1/200/200";
+    let secureQRUrl = "images/收款码.jpg";
     const getProtectedQR = () => secureQRUrl;
-    Object.defineProperty(window, 'secureQRUrl', { get: () => secureQRUrl, set: () => { alert("收款码受保护，无法篡改"); } });
+    Object.defineProperty(window, 'secureQRUrl', { get: () => secureQRUrl, set: () => { alert(""); } });
 
     // 辅助函数
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, (m) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
