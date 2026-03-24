@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>一莱沉香 | 天然沉香雅集</title>
+    <title>一莱沉香官方网站</title>
     <style>
         * {
             margin: 0;
@@ -387,15 +387,15 @@
 <!-- 微信收款码面板（防篡改保护） -->
 <div id="paymentPanel" class="side-panel">
     <div class="panel-header">
-        <span>💰 微信收款码</span>
+        <span>💰 微信收款码 💰</span>
         <button class="close-panel" id="closePaymentBtn">✕</button>
     </div>
     <div class="panel-body">
         <div id="secureQrContainer">
-            <img id="paymentQrImg" class="qr-image" src="images/收款码.jpg" alt="收款码" onerror="this.src='https://picsum.photos/id/1/200/200'">
+            <img id="paymentQrImg" class="qr-image" src="images/A.jpg" alt="收款码">
         </div>
-        <div class="qr-caption">请扫码支付，完成后添加微信好友发送截图</div>
-        <span class="badge-protect">🛡️ 防篡改保护 | 官方收款码</span>
+        <div class="qr-caption">扫码支付，添加微信</div>
+        <span class="badge-protect">防篡改保护 | 官方收款码</span>
         <div style="font-size:0.7rem; margin-top:12px; color:#b88e6e;">支付时备注【沉香+昵称】便于核对</div>
     </div>
 </div>
@@ -403,26 +403,26 @@
 <!-- 微信好友二维码面板（替代客服） -->
 <div id="wechatPanel" class="side-panel">
     <div class="panel-header">
-        <span>👥 添加掌柜微信</span>
+        <span>添加掌柜微信</span>
         <button class="close-panel" id="closeWechatBtn">✕</button>
     </div>
     <div class="panel-body">
-        <img id="wechatQrImg" class="qr-image" src="images/wechat_friend.jpg" alt="微信好友二维码" onerror="this.src='https://picsum.photos/id/26/200/200'">
+        <img id="wechatQrImg" class="qr-image" src="images/B.jpg" alt="微信好友二维码">
         <div class="qr-caption">扫一扫添加好友，咨询/售后/订单确认</div>
-        <span class="badge-protect">✨ 一莱沉香 · 专属顾问</span>
-        <div style="font-size:0.7rem; margin-top:12px;">添加后备注“香友”优先通过</div>
+        <span class="badge-protect">一莱沉香 · 专属顾问</span>
+        <div style="font-size:0.7rem; margin-top:12px;">备注 "香友" 优先通过哦~</div>
     </div>
 </div>
 
 <!-- 商品详情引导模态框 -->
 <div id="infoModal" class="modal">
     <div class="modal-content">
-        <h3>📿 一莱沉香 · 雅物</h3>
+        <h3>📿一莱沉香 · 雅物</h3>
         <p style="margin:12px 0;" id="modalProductName"></p>
         <div style="background:#fef8f0; border-radius:20px; padding:12px;">
-            <div style="font-weight:bold;">✨ 选购方式</div>
-            <p style="font-size:0.85rem; margin:8px 0;">点击底部💰支付按钮获取收款码 → 微信扫码支付 → 添加掌柜微信发送截图 → 核对后发货</p>
-            <div class="badge-protect" style="margin-top:8px;">🔐 官方直营 正品保障</div>
+            <div style="font-weight:bold;">✨ 选购方式 ✨</div>
+            <p style="font-size:0.85rem; margin:8px 0;">请点击底部💰按钮获取收款码 → 微信扫码支付 → 添加掌柜微信发送截图 → 核对后发货</p>
+            <div class="badge-protect" style="margin-top:8px;">官方直营 正品保障</div>
         </div>
         <button id="closeModalBtn" style="margin-top:20px; background:#7b5a44; border:none; padding:10px 20px; border-radius:40px; color:white; cursor:pointer;">关闭</button>
     </div>
@@ -456,11 +456,11 @@
     let currentSearchKeyword = "";    // 搜索关键词
 
     // 防篡改收款码（保留原有保护逻辑）
-    let secureQRUrl = "images/收款码.jpg";
+    let secureQRUrl = "images/A.jpg";
     const getProtectedQR = () => secureQRUrl;
     Object.defineProperty(window, 'secureQRUrl', { get: () => secureQRUrl, set: () => { alert("防篡改保护：收款码不可更改"); } });
 
-    const wechatFriendQR = "images/wechat_friend.jpg";
+    const wechatFriendQR = "images/B.jpg";
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, (m) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
 
@@ -503,7 +503,7 @@
             if(currentSearchKeyword) {
                 searchInfoDiv.innerHTML = `🔍 搜索“${escapeHtml(currentSearchKeyword)}” 共 0 件 · 点击清除`;
             } else {
-                searchInfoDiv.innerHTML = currentCategory !== "all" ? `📂 当前分类 · 点击清除搜索` : `✨ 全部香品 ${products.length} 款 · 点击清除搜索`;
+                searchInfoDiv.innerHTML = currentCategory !== "all" ? ` 当前分类 · 点击清除搜索` : ` 全部香品 ${products.length} 款 · 点击清除搜索`;
             }
             return;
         }
@@ -513,10 +513,10 @@
             searchInfoDiv.innerHTML = `🔍 “${escapeHtml(currentSearchKeyword)}” 共 ${filtered.length} 件香品 · 点击清除`;
         } else {
             if(currentCategory === "all") {
-                searchInfoDiv.innerHTML = `✨ 全部香品 ${filtered.length} 款 · 点击清除搜索`;
+                searchInfoDiv.innerHTML = ` 全部香品 ${filtered.length} 款 · 点击清除搜索`;
             } else {
                 const catName = document.querySelector(`.cat-btn[data-cat="${currentCategory}"]`)?.innerText || currentCategory;
-                searchInfoDiv.innerHTML = `📂 ${catName} · 共 ${filtered.length} 款 · 点击清除搜索`;
+                searchInfoDiv.innerHTML = ` ${catName} · 共 ${filtered.length} 款 · 点击清除搜索`;
             }
         }
         
@@ -534,7 +534,7 @@
                             <span class="unit">${escapeHtml(product.unit)}</span>
                         </div>
                         <div class="buy-simple">
-                            <span class="order-hint-simple">📱 扫码支付 · 添加掌柜微信</span>
+                            <span class="order-hint-simple">........<详解>........</span>
                         </div>
                     </div>
                 </div>
