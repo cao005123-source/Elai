@@ -695,7 +695,7 @@
         }, 1200);
     };
 
-        // ========== 图片懒加载（新增）==========
+	// ========== 图片懒加载（新增）==========
 function initLazyLoad() {
     if ('IntersectionObserver' in window) {
         let lazyImages = document.querySelectorAll('.product-img img');
@@ -733,7 +733,7 @@ renderProductGrid = function() {
     originalRender.apply(this, arguments);
     setTimeout(initLazyLoad, 50);
 };
-    
+
 </script>
 </body>
 </html>
