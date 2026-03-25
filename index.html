@@ -694,6 +694,46 @@
             }
         }, 1200);
     };
+
+        // ========== 图片懒加载（新增）==========
+function initLazyLoad() {
+    if ('IntersectionObserver' in window) {
+        let lazyImages = document.querySelectorAll('.product-img img');
+        let imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let img = entry.target;
+                    let originalSrc = img.getAttribute('data-src');
+                    if (originalSrc) {
+                        img.src = originalSrc;
+                        img.removeAttribute('data-src');
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        lazyImages.forEach(img => {
+            if (img.src && !img.src.includes('picsum') && !img.src.includes('data:image')) {
+                img.setAttribute('data-src', img.src);
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f3ede7"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23b29278" font-size="14"%3E🌿 加载中...%3C/text%3E%3C/svg%3E';
+                imageObserver.observe(img);
+            }
+        });
+    }
+}
+
+// 等待页面加载完成后初始化，并 hook 渲染函数
+window.addEventListener('load', () => {
+    initLazyLoad();
+});
+
+// 保存原函数
+const originalRender = renderProductGrid;
+renderProductGrid = function() {
+    originalRender.apply(this, arguments);
+    setTimeout(initLazyLoad, 50);
+};
+    
 </script>
 </body>
 </html>
