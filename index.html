@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>一莱沉香官方网站</title>
+    <title>一莱沉香 · 炫酷甄选</title>
     <style>
         * {
             margin: 0;
@@ -13,35 +13,53 @@
 
         body {
             background-color: #faf7f2;
-            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, 'Microsoft YaHei', sans-serif;
+            font-family: 'Segoe UI', 'Poppins', 'Roboto', system-ui, -apple-system, 'Microsoft YaHei', sans-serif;
             color: #2c241a;
             line-height: 1.4;
+            min-height: 100vh;
+        }
+
+        /* 背景装饰保留 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(123, 90, 68, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(180, 95, 43, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .hero {
             text-align: center;
             margin-bottom: 2rem;
-            border-bottom: 1px solid #e3d9cf;
             padding-bottom: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid #e3d9cf;
         }
         .hero h1 {
-            font-size: 2.4rem;
-            letter-spacing: 2px;
-            font-weight: 500;
+            font-size: 3rem;
             color: #4a2e23;
+            letter-spacing: 4px;
+            font-weight: 500;
         }
         .hero .sub {
             font-size: 1rem;
             color: #7a5e4c;
+            letter-spacing: 2px;
         }
 
-        /* 搜索区域 */
         .search-section {
             max-width: 560px;
             margin: 0 auto 1.5rem auto;
@@ -60,7 +78,7 @@
             flex: 1;
             border: none;
             padding: 0.75rem 0;
-            font-size: 0.95rem;
+            font-size: 1rem;
             background: transparent;
             outline: none;
             font-family: inherit;
@@ -77,12 +95,13 @@
             color: white;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
         .search-box button:hover {
             background: #5e3f2c;
+            transform: scale(1.02);
         }
         .search-info {
             text-align: center;
@@ -93,10 +112,10 @@
             display: inline-block;
             width: auto;
             padding: 0 10px;
+            transition: all 0.3s;
         }
         .search-info:hover {
             color: #7b5a44;
-            text-decoration: underline;
         }
 
         .category-bar {
@@ -110,14 +129,19 @@
             background: transparent;
             border: 1.5px solid #dccfbc;
             padding: 0.6rem 1.8rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             border-radius: 48px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             color: #4f3a2c;
         }
-        .cat-btn:hover, .cat-btn.active {
+        .cat-btn:hover {
+            background: rgba(123, 90, 68, 0.1);
+            border-color: #7b5a44;
+            transform: translateY(-2px);
+        }
+        .cat-btn.active {
             background-color: #7b5a44;
             border-color: #7b5a44;
             color: white;
@@ -125,41 +149,61 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            animation: fadeIn 0.3s ease;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+            animation: fadeInUp 0.5s ease;
         }
 
         .product-card {
             background: #ffffff;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
             border: 1px solid #f0e7de;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(123, 90, 68, 0.05), transparent);
+            transition: left 0.6s;
+        }
+        .product-card:hover::before {
+            left: 100%;
         }
         .product-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-8px) scale(1.02);
+            border-color: #e3d9cf;
             box-shadow: 0 12px 24px rgba(70, 40, 20, 0.1);
         }
 
         .product-img {
             background: linear-gradient(135deg, #f3ede7 0%, #e8dfd5 100%);
-            height: 200px;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
         .product-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
         }
 
         .product-info {
-            padding: 1rem 1.2rem 1.2rem;
+            padding: 1.2rem;
         }
         .product-name {
             font-size: 1.2rem;
@@ -168,7 +212,7 @@
             margin-bottom: 0.3rem;
         }
         .product-desc {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #7b6858;
             margin: 0.4rem 0;
             line-height: 1.4;
@@ -180,7 +224,7 @@
             margin: 0.8rem 0 0.4rem;
         }
         .price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #b45f2b;
         }
@@ -204,7 +248,6 @@
             display: inline-block;
         }
 
-        /* 底部悬浮按钮 (收款码 + 微信好友) */
         .float-buttons {
             position: fixed;
             bottom: 24px;
@@ -226,14 +269,140 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            transition: all 0.2s;
+            transition: all 0.3s;
         }
         .float-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(5deg);
             background: #5e3f2c;
         }
 
-        /* 侧边面板 (收款码 / 微信二维码) */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+        .detail-modal.show {
+            display: flex;
+        }
+        .detail-content {
+            background: white;
+            max-width: 1000px;
+            width: 90%;
+            max-height: 85vh;
+            border-radius: 32px;
+            padding: 1.8rem;
+            border: 1px solid #e3d9cf;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s;
+        }
+        .detail-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: #f0e7de;
+            border: none;
+            color: #4a2e23;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .detail-close:hover {
+            background: #7b5a44;
+            color: white;
+            transform: rotate(90deg);
+        }
+        .detail-main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+        .detail-gallery {
+            flex: 1.2;
+            min-width: 260px;
+        }
+        .detail-main-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 24px;
+            border: 2px solid #e3d9cf;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+        }
+        .detail-thumbnails {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 16px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .thumb-img:hover, .thumb-img.active {
+            border-color: #7b5a44;
+            transform: scale(1.05);
+        }
+        .detail-info {
+            flex: 1;
+            min-width: 260px;
+        }
+        .detail-info h2 {
+            font-size: 1.8rem;
+            color: #4a2e23;
+            margin-bottom: 0.5rem;
+        }
+        .detail-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #b45f2b;
+            margin: 1rem 0;
+        }
+        .detail-desc {
+            color: #7b6858;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        .detail-spec {
+            background: #fef6ef;
+            border-radius: 16px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .detail-spec h4 {
+            color: #7b5a44;
+            margin-bottom: 0.8rem;
+        }
+        .detail-spec p {
+            color: #7b6858;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
         .side-panel {
             position: fixed;
             bottom: 100px;
@@ -262,15 +431,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        .panel-header button {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
         .panel-body {
             padding: 20px 16px;
             text-align: center;
@@ -292,21 +452,6 @@
             margin-top: 8px;
             font-weight: 500;
         }
-        .badge-protect {
-            font-size: 0.7rem;
-            background: #e9f0e6;
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 30px;
-            margin-top: 12px;
-        }
-        .close-panel {
-            cursor: pointer;
-            font-size: 1.2rem;
-            background: none;
-            border: none;
-            color: white;
-        }
         .footer {
             margin-top: 3rem;
             text-align: center;
@@ -314,35 +459,22 @@
             color: #b89c84;
         }
 
-        /* 商品引导模态框 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-        .modal-content {
-            background: white;
-            max-width: 400px;
-            width: 90%;
-            border-radius: 32px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px);}
-            to { opacity: 1; transform: translateY(0);}
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px);}
-            to { opacity: 1; transform: translateY(0);}
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 680px) {
+            .hero h1 { font-size: 2rem; }
+            .detail-main { flex-direction: column; }
+            .thumb-img { width: 55px; height: 55px; }
             .side-panel { width: 280px; right: 16px; bottom: 90px; }
             .float-buttons { bottom: 16px; right: 16px; gap: 12px; }
             .float-btn { width: 48px; height: 48px; font-size: 1.2rem; }
@@ -356,13 +488,12 @@
         <div class="sub">灵犀一缕，幽玄清雅 | 源自天然沉香</div>
     </div>
 
-    <!-- 全局搜索栏：无视分类，在所有产品中检索 -->
     <div class="search-section">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 搜索沉香产品，如“棋楠”“芽庄”“精油”“手串”..." autocomplete="off">
+            <input type="text" id="searchInput" placeholder="🔍 搜索沉香产品，如"棋楠""芽庄""精油""手串"..." autocomplete="off">
             <button id="searchBtn">搜索</button>
         </div>
-        <div id="searchInfo" class="search-info" title="点击清除搜索">✨ 搜索全品类 · 点击此处可清除</div>
+        <div id="searchInfo" class="search-info">✨ 搜索全品类 · 点击清除</div>
     </div>
 
     <div class="category-bar">
@@ -375,191 +506,201 @@
     </div>
 
     <div id="productGrid" class="product-grid"></div>
-    <div class="footer">灵犀一缕，幽玄清雅 | 源自天然沉香</div>
+    <div class="footer">灵犀一缕 · 幽玄清雅 | 源自天然沉香</div>
 </div>
 
-<!-- 底部悬浮按钮：收款码 + 微信好友二维码 -->
 <div class="float-buttons">
     <button class="float-btn" id="paymentCodeBtn">💰</button>
-    <button class="float-btn" id="wechatFriendBtn">👥</button>
+    <button class="float-btn" id="wechatFriendBtn">🤝</button>
 </div>
 
-<!-- 微信收款码面板（防篡改保护） -->
 <div id="paymentPanel" class="side-panel">
     <div class="panel-header">
-        <span>💰 微信收款码 💰</span>
+        <span>💰 微信收款码</span>
         <button class="close-panel" id="closePaymentBtn">✕</button>
     </div>
     <div class="panel-body">
-        <div id="secureQrContainer">
-            <img id="paymentQrImg" class="qr-image" src="images/A.jpg" alt="收款码">
-        </div>
+        <img id="paymentQrImg" class="qr-image" src="images/A.jpg" alt="收款码">
         <div class="qr-caption">扫码支付，添加微信</div>
-        <span class="badge-protect">防篡改保护 | 官方收款码</span>
+        <span class="badge-protect" style="font-size:0.7rem; background:#fef6ef; display:inline-block; padding:2px 10px; border-radius:30px; margin-top:12px;">防篡改保护 | 官方收款码</span>
         <div style="font-size:0.7rem; margin-top:12px; color:#b88e6e;">支付时备注【沉香+昵称】便于核对</div>
     </div>
 </div>
 
-<!-- 微信好友二维码面板（替代客服） -->
 <div id="wechatPanel" class="side-panel">
     <div class="panel-header">
         <span>添加掌柜微信</span>
         <button class="close-panel" id="closeWechatBtn">✕</button>
     </div>
     <div class="panel-body">
-        <img id="wechatQrImg" class="qr-image" src="images/B.jpg" alt="微信好友二维码">
+        <img id="wechatQrImg" class="qr-image" src="images/B.jpg" alt="微信二维码">
         <div class="qr-caption">扫一扫添加好友，咨询/售后/订单确认</div>
-        <span class="badge-protect">一莱沉香 · 专属顾问</span>
+        <span class="badge-protect" style="font-size:0.7rem; background:#fef6ef; display:inline-block; padding:2px 10px; border-radius:30px; margin-top:12px;">一莱沉香 · 专属顾问</span>
         <div style="font-size:0.7rem; margin-top:12px;">备注 "香友" 优先通过哦~</div>
     </div>
 </div>
 
-<!-- 商品详情引导模态框 -->
-<div id="infoModal" class="modal">
-    <div class="modal-content">
-        <h3>📿一莱沉香 · 雅物</h3>
-        <p style="margin:12px 0;" id="modalProductName"></p>
-        <div style="background:#fef8f0; border-radius:20px; padding:12px;">
-            <div style="font-weight:bold;">✨ 选购方式 ✨</div>
-            <p style="font-size:0.85rem; margin:8px 0;">请点击底部💰按钮获取收款码 → 微信扫码支付 → 添加掌柜微信发送截图 → 核对后发货</p>
-            <div class="badge-protect" style="margin-top:8px;">官方直营 正品保障</div>
+<div id="detailModal" class="detail-modal">
+    <div class="detail-content">
+        <button class="detail-close" id="closeDetailBtn">✕</button>
+        <div class="detail-main" id="detailMain">
+            <!-- 动态填充详情内容 -->
         </div>
-        <button id="closeModalBtn" style="margin-top:20px; background:#7b5a44; border:none; padding:10px 20px; border-radius:40px; color:white; cursor:pointer;">关闭</button>
     </div>
 </div>
 
 <script>
-    // ===================== 商品数据 =====================
+    // 商品数据（带多图）
     const products = [
-        { id:1, name:"玫瑰沉香", desc:"清新温雅、助眠安神", price:800, unit:"380支/捆", category:"incense", image:"https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp" },
-        { id:2, name:"鹅梨帐中香", desc:"气味淡雅悠长，甘甜馥郁", price:800, unit:"310支/捆", category:"incense", image:"https://picui.ogmua.cn/s1/2026/03/24/69c1fbcf3edce.webp" },
-        { id:3, name:"棋楠勾丝", desc:"安神舒心，静心养生", price:6800, unit:"520支/捆", category:"incense", image:"https://picui.ogmua.cn/s1/2026/03/24/69c1fcb489ddb.webp" },
-        { id:4, name:"芽庄沉香", desc:"果香清甜，质地细腻", price:800, unit:"680支/捆", category:"incense", image:"https://picui.ogmua.cn/s1/2026/03/24/69c1fdf56702d.webp" },
-        { id:5, name:"海南勾丝原料", desc:"油脂丰富，甜味花香", price:100, unit:"/g", category:"raw", image:"https://picui.ogmua.cn/s1/2026/03/24/69c1fe9f92c48.webp"},
-        { id:6, name:"海南黄奇.切油薄片", desc:"透明的黄金色泽，油脂满满，清凉人参味，棋韵浓郁、蜜甜花果香、霸气的辛麻之感，也可以煮水、泡茶，泡酒入药等", price:128, unit:"/g", category:"raw", image:"https://picui.ogmua.cn/s1/2026/03/25/69c3d2d165954.webp" },
-        { id:7, name:"棋楠沉水片珠碎料", desc:"棋楠凉韵味浓郁、霸气的辛麻之感、蜜甜花果香", price:160, unit:"/g", category:"raw", image:"https://picui.ogmua.cn/s1/2026/03/25/69c3d294e79ef.webp" },
-        { id:8, name:"棋楠手工香", desc:"余韵悠长，沉稳内敛", price:900, unit:"/捆", category:"incense", image:"https://picui.ogmua.cn/s1/2026/03/25/69c3d1f44ce01.webp" },
-        { id:9, name:"无上清凉", desc:"清香柔和、带蜜甜韵", price:900, unit:"/捆", category:"incense", image:"https://picui.ogmua.cn/s1/2026/03/25/69c3d1f4277c3.webp" },
-		{ id:10,name:"棋楠小米粒", desc:"油脂不错的状态，油脂丰富饱满，熏香优选，淡淡的香韵蜜甜香花香厚重，凉味通透明显、熏香上炉", price:18, unit:"/g", category:"raw", image:"https://picui.ogmua.cn/s1/2026/03/26/69c4843fa7bfd.webp" },
-		{ id:11,name:"棋楠钻珠料", desc:"油脂丰富饱满，熏香优选，淡淡的香韵蜜甜香花香厚重，凉味通透明显、熏香上炉", price:25, unit:"/g", category:"raw", image:"https://picui.ogmua.cn/s1/2026/03/26/69c4879faaeac.webp" },
-		{ id:12,name:"棋楠切丝", desc:"醇化好料，油脂丰富饱满，干净无杂的，香韵清新淡雅，清闻上炉爆发力强。", price:85, unit:"/g", category:"raw", image:"https://picui.ogmua.cn/s1/2026/03/27/69c60b9ba9875.webp" },
-		{ id:13,name:"白奇树心料. 随形手串", desc:"原木原色，生闻棋韵明显，香气浓郁爆香，甜凉蜜花香，甘甜醇厚，穿透力强，持久留香，香气饱满，金丝红油。", price:1380, unit:"7-8mm", category:"bracelet", image:"https://picui.ogmua.cn/s1/2026/03/27/69c60ccd0232e.webp" }
+        { id:1, name:"玫瑰沉香", desc:"清新温雅、助眠安神，淡淡玫瑰花香融入沉香基底", price:800, unit:"380支/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp", 
+          images:["https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp"], 
+          specs:"【待填写规格参数】\n· 原料产地：\n· 制作工艺：机制线香\n· 香韵特点：\n· 适用场景：" },
+        { id:2, name:"鹅梨帐中香", desc:"气味淡雅悠长，甘甜馥郁，古法配方", price:800, unit:"310支/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/24/69c1fbcf3edce.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/24/69c1fbcf3edce.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fbcf3edce.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fbcf3edce.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 制作工艺：机制线香\n· 香韵特点：\n· 适用场景：" },
+        { id:3, name:"棋楠勾丝", desc:"安神舒心，静心养生，顶级棋楠勾丝", price:6800, unit:"520支/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/24/69c1fcb489ddb.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/24/69c1fcb489ddb.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fcb489ddb.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fcb489ddb.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 制作工艺：机制线香\n· 香韵特点：\n· 适用场景：" },
+        { id:4, name:"芽庄沉香", desc:"果香清甜，质地细腻，越南芽庄产区", price:800, unit:"680支/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/24/69c1fdf56702d.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/24/69c1fdf56702d.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fdf56702d.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fdf56702d.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 制作工艺：机制线香\n· 香韵特点：\n· 适用场景：" },
+        { id:5, name:"海南勾丝原料", desc:"油脂丰富，甜味花香", price:100, unit:"/g", category:"raw", mainImage:"https://picui.ogmua.cn/s1/2026/03/24/69c1fe9f92c48.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/24/69c1fe9f92c48.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fe9f92c48.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fe9f92c48.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 油脂等级：\n· 香气特点：\n· 推荐用途：" },
+        { id:6, name:"海南黄奇·切油薄片", desc:"透明的黄金色泽，油脂满满，清凉人参味", price:128, unit:"/g", category:"raw", mainImage:"https://picui.ogmua.cn/s1/2026/03/25/69c3d2d165954.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/25/69c3d2d165954.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d2d165954.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d2d165954.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 油脂等级：\n· 香气特点：\n· 推荐用途：" },
+        { id:7, name:"棋楠沉水片珠碎料", desc:"棋楠凉韵味浓郁、霸气的辛麻之感", price:160, unit:"/g", category:"raw", mainImage:"https://picui.ogmua.cn/s1/2026/03/25/69c3d294e79ef.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/25/69c3d294e79ef.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d294e79ef.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d294e79ef.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 油脂等级：\n· 香气特点：\n· 推荐用途：" },
+        { id:8, name:"棋楠手工香", desc:"余韵悠长，沉稳内敛", price:900, unit:"/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/25/69c3d1f44ce01.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/25/69c3d1f44ce01.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d1f44ce01.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d1f44ce01.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 制作工艺：纯手工\n· 香韵特点：\n· 适用场景：" },
+        { id:9, name:"无上清凉", desc:"清香柔和、带蜜甜韵", price:900, unit:"/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/25/69c3d1f4277c3.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/25/69c3d1f4277c3.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d1f4277c3.webp","https://picui.ogmua.cn/s1/2026/03/25/69c3d1f4277c3.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 制作工艺：机制线香\n· 香韵特点：\n· 适用场景：" },
+        { id:10,name:"棋楠小米粒", desc:"油脂丰富饱满，熏香优选", price:18, unit:"/g", category:"raw", mainImage:"https://picui.ogmua.cn/s1/2026/03/26/69c4843fa7bfd.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/26/69c4843fa7bfd.webp","https://picui.ogmua.cn/s1/2026/03/26/69c4843fa7bfd.webp","https://picui.ogmua.cn/s1/2026/03/26/69c4843fa7bfd.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 油脂等级：\n· 香气特点：\n· 推荐用途：" },
+        { id:11,name:"棋楠钻珠料", desc:"油脂丰富饱满，凉味通透明显", price:25, unit:"/g", category:"raw", mainImage:"https://picui.ogmua.cn/s1/2026/03/26/69c4879faaeac.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/26/69c4879faaeac.webp","https://picui.ogmua.cn/s1/2026/03/26/69c4879faaeac.webp","https://picui.ogmua.cn/s1/2026/03/26/69c4879faaeac.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 油脂等级：\n· 香气特点：\n· 推荐用途：" },
+        { id:12,name:"棋楠切丝", desc:"醇化好料，油脂丰富饱满", price:85, unit:"/g", category:"raw", mainImage:"https://picui.ogmua.cn/s1/2026/03/27/69c60b9ba9875.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/27/69c60b9ba9875.webp","https://picui.ogmua.cn/s1/2026/03/27/69c60b9ba9875.webp","https://picui.ogmua.cn/s1/2026/03/27/69c60b9ba9875.webp"],
+          specs:"【待填写规格参数】\n· 原料产地：\n· 油脂等级：\n· 香气特点：\n· 推荐用途：" },
+        { id:13,name:"白奇树心料·随形手串", desc:"原木原色，生闻棋韵明显，香气浓郁爆香", price:1380, unit:"7-8mm", category:"bracelet", mainImage:"https://picui.ogmua.cn/s1/2026/03/27/69c60ccd0232e.webp",
+          images:["https://picui.ogmua.cn/s1/2026/03/27/69c60ccd0232e.webp","https://picui.ogmua.cn/s1/2026/03/27/69c60ccd0232e.webp","https://picui.ogmua.cn/s1/2026/03/27/69c60ccd0232e.webp"],
+          specs:"【规格参数】\n· 珠径尺寸：7-8mm\n· 克重：6.2g\n· 产地：海南 " }
     ];
 
-    // 状态管理
-    let currentCategory = "all";      // 默认显示全部（无视分类）
-    let currentSearchKeyword = "";    // 搜索关键词
+    let currentCategory = "all";
+    let currentSearchKeyword = "";
 
-    // 防篡改收款码（保留原有保护逻辑）
     let secureQRUrl = "images/A.jpg";
     const getProtectedQR = () => secureQRUrl;
-    Object.defineProperty(window, 'secureQRUrl', { get: () => secureQRUrl, set: () => { alert("防篡改保护：收款码不可更改"); } });
-
     const wechatFriendQR = "images/B.jpg";
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, (m) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
 
-    // 核心过滤：无视分类 + 支持全局搜索 (搜索时无视当前选中的分类，在所有商品中检索)
     function getFilteredProducts() {
         let filtered = [...products];
-        
-        // 优先应用搜索关键词（无视分类）
         if(currentSearchKeyword.trim() !== "") {
             const keyword = currentSearchKeyword.trim().toLowerCase();
-            filtered = filtered.filter(p => 
-                p.name.toLowerCase().includes(keyword) || 
-                p.desc.toLowerCase().includes(keyword) ||
-                p.category.toLowerCase().includes(keyword) ||
-                (p.unit && p.unit.toLowerCase().includes(keyword))
-            );
-        } 
-        // 如果没有搜索词，再按分类筛选（如果分类不是“全部”）
-        else if(currentCategory !== "all") {
+            filtered = filtered.filter(p => p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword));
+        } else if(currentCategory !== "all") {
             filtered = filtered.filter(p => p.category === currentCategory);
         }
-        
         return filtered;
     }
 
-    // 渲染商品网格（无任何加减数量与订单按钮，仅展示）
     function renderProductGrid() {
         const filtered = getFilteredProducts();
         const grid = document.getElementById("productGrid");
         const searchInfoDiv = document.getElementById("searchInfo");
         
         if(filtered.length === 0) {
-            let msg = "";
-            if(currentSearchKeyword) {
-                msg = `🔍 没有找到 “${escapeHtml(currentSearchKeyword)}” 相关香品，试试其他关键词吧～`;
-            } else {
-                msg = currentCategory !== "all" ? `✨ 当前分类暂无香品 ✨` : `✨ 暂无香品 ✨`;
-            }
-            grid.innerHTML = `<div style="text-align:center; padding:50px 20px; color:#b29278;">${msg}</div>`;
-            if(currentSearchKeyword) {
-                searchInfoDiv.innerHTML = `🔍 搜索“${escapeHtml(currentSearchKeyword)}” 共 0 件 · 点击清除`;
-            } else {
-                searchInfoDiv.innerHTML = currentCategory !== "all" ? ` 当前分类 · 点击清除搜索` : ` 全部香品 ${products.length} 款 · 点击清除搜索`;
-            }
+            grid.innerHTML = `<div style="text-align:center; padding:50px 20px; color:#b29278;">✨ 暂无香品 ✨</div>`;
             return;
         }
         
-        // 显示搜索/分类信息
-        if(currentSearchKeyword) {
-            searchInfoDiv.innerHTML = `🔍 “${escapeHtml(currentSearchKeyword)}” 共 ${filtered.length} 件香品 · 点击清除`;
-        } else {
-            if(currentCategory === "all") {
-                searchInfoDiv.innerHTML = ` 全部香品 ${filtered.length} 款 · 点击清除搜索`;
-            } else {
-                const catName = document.querySelector(`.cat-btn[data-cat="${currentCategory}"]`)?.innerText || currentCategory;
-                searchInfoDiv.innerHTML = ` ${catName} · 共 ${filtered.length} 款 · 点击清除搜索`;
-            }
-        }
+        searchInfoDiv.innerHTML = currentSearchKeyword ? `🔍 “${escapeHtml(currentSearchKeyword)}” 共 ${filtered.length} 件` : `✨ 共 ${filtered.length} 款香品 · 点击清除`;
         
-        grid.innerHTML = filtered.map(product => {
-            return `
-                <div class="product-card" data-id="${product.id}">
-                    <div class="product-img">
-                        <img src="${product.image}" alt="${escapeHtml(product.name)}" onerror="this.src='https://picsum.photos/id/20/300/200'">
+        grid.innerHTML = filtered.map(product => `
+            <div class="product-card" data-id="${product.id}">
+                <div class="product-img">
+                    <img src="${product.mainImage}" alt="${escapeHtml(product.name)}" onerror="this.src='https://picsum.photos/id/1/300/200'">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">${escapeHtml(product.name)}</div>
+                    <div class="product-desc">${escapeHtml(product.desc)}</div>
+                    <div class="price-row">
+                        <span class="price">¥${product.price}</span>
+                        <span class="unit">${escapeHtml(product.unit)}</span>
                     </div>
-                    <div class="product-info">
-                        <div class="product-name">${escapeHtml(product.name)}</div>
-                        <div class="product-desc">${escapeHtml(product.desc)}</div>
-                        <div class="price-row">
-                            <span class="price">¥${product.price}</span>
-                            <span class="unit">${escapeHtml(product.unit)}</span>
-                        </div>
-                        <div class="buy-simple">
-                            <span class="order-hint-simple">........<详解>........</span>
-                        </div>
+                    <div class="buy-simple">
+                        <span class="order-hint-simple">✨ 点击查看详情 ✨</span>
                     </div>
                 </div>
-            `;
-        }).join('');
+            </div>
+        `).join('');
 
-        // 绑定商品点击事件
         document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', (e) => {
+            card.addEventListener('click', () => {
                 const productId = parseInt(card.dataset.id);
                 const product = products.find(p => p.id === productId);
-                if(product) {
-                    document.getElementById("modalProductName").innerHTML = `<strong>${escapeHtml(product.name)}</strong><br>¥${product.price} ${product.unit}<br><span style="font-size:0.75rem;">${escapeHtml(product.desc)}</span>`;
-                    document.getElementById("infoModal").style.display = "flex";
-                }
+                if(product) showProductDetail(product);
             });
         });
     }
 
-    // 执行搜索（无视分类，全库检索）
+    function showProductDetail(product) {
+        const modal = document.getElementById("detailModal");
+        const detailMain = document.getElementById("detailMain");
+        
+        let currentMainImg = product.mainImage;
+        const images = product.images || [product.mainImage];
+        
+        detailMain.innerHTML = `
+            <div class="detail-gallery">
+                <img id="detailMainImg" class="detail-main-img" src="${currentMainImg}" alt="${escapeHtml(product.name)}">
+                <div class="detail-thumbnails" id="detailThumbnails">
+                    ${images.map((img, idx) => `
+                        <img class="thumb-img ${idx === 0 ? 'active' : ''}" data-src="${img}" src="${img}" alt="缩略图">
+                    `).join('')}
+                </div>
+            </div>
+            <div class="detail-info">
+                <h2>${escapeHtml(product.name)}</h2>
+                <div class="detail-price">¥${product.price}</div>
+                <div class="detail-desc">${escapeHtml(product.desc)}</div>
+                <div class="detail-spec">
+                    <h4>📦 规格参数</h4>
+                    <p>${escapeHtml(product.specs).replace(/\n/g, '<br>')}</p>
+                </div>
+            </div>
+        `;
+        
+        modal.classList.add("show");
+        
+        setTimeout(() => {
+            const thumbs = document.querySelectorAll('.thumb-img');
+            const mainImg = document.getElementById('detailMainImg');
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    thumbs.forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                    mainImg.src = thumb.dataset.src || thumb.src;
+                });
+            });
+        }, 50);
+    }
+
     function performSearch() {
-        const input = document.getElementById("searchInput");
-        const keyword = input.value.trim();
+        const keyword = document.getElementById("searchInput").value.trim();
         currentSearchKeyword = keyword;
-        // 重要：搜索时自动将分类高亮切换到“全部”，让用户明确当前是在全局搜索
         if(keyword !== "") {
-            // 切换分类高亮到“全部”，但不清空搜索词（提升体验）
             currentCategory = "all";
-            const allBtns = document.querySelectorAll(".cat-btn");
-            allBtns.forEach(btn => {
+            document.querySelectorAll(".cat-btn").forEach(btn => {
                 if(btn.dataset.cat === "all") btn.classList.add("active");
                 else btn.classList.remove("active");
             });
@@ -567,177 +708,68 @@
         renderProductGrid();
     }
     
-    // 清除搜索并恢复当前分类展示（若分类是全部则展示全部，否则展示该分类）
-    function clearSearchAndReset() {
-        document.getElementById("searchInput").value = "";
-        currentSearchKeyword = "";
-        // 不清除当前分类，维持当前选中的分类高亮，重新渲染即可
-        renderProductGrid();
-    }
-    
-    // 分类切换（当点击分类时，如果存在搜索关键词则先清空搜索框，保证分类切换后展示该分类下全部商品）
     function switchCategory(category) {
-        // 切换分类时，清除搜索关键词，使搜索框为空，并重新以分类模式展示
         currentSearchKeyword = "";
         document.getElementById("searchInput").value = "";
         currentCategory = category;
-        
-        // 更新按钮高亮
-        const btns = document.querySelectorAll(".cat-btn");
-        btns.forEach(btn => {
+        document.querySelectorAll(".cat-btn").forEach(btn => {
             if(btn.dataset.cat === category) btn.classList.add("active");
             else btn.classList.remove("active");
         });
         renderProductGrid();
     }
 
-    // 初始化分类栏与全部按钮逻辑
-    function initCategoryEvents() {
-        const btns = document.querySelectorAll(".cat-btn");
-        btns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const cat = btn.dataset.cat;
-                switchCategory(cat);
-            });
-        });
-        // 默认激活全部
-        const defaultAll = document.querySelector(".cat-btn[data-cat='all']");
-        if(defaultAll) defaultAll.classList.add("active");
-        currentCategory = "all";
-        renderProductGrid();
-    }
-
-    // 面板控制 (收款码面板 与 微信好友面板)
-    let paymentPanelOpen = false;
-    let wechatPanelOpen = false;
+    let paymentPanelOpen = false, wechatPanelOpen = false;
     function closeAllPanels() {
         document.getElementById("paymentPanel").classList.remove("show");
         document.getElementById("wechatPanel").classList.remove("show");
-        paymentPanelOpen = false;
-        wechatPanelOpen = false;
+        paymentPanelOpen = wechatPanelOpen = false;
     }
-    
     function showPaymentPanel() {
-        if(paymentPanelOpen) {
+        if(paymentPanelOpen) closeAllPanels();
+        else {
             closeAllPanels();
-        } else {
-            closeAllPanels();
-            const panel = document.getElementById("paymentPanel");
-            const qrImg = document.getElementById("paymentQrImg");
-            qrImg.src = getProtectedQR();
-            qrImg.onerror = function() { this.src = "https://picsum.photos/id/1/200/200"; };
-            panel.classList.add("show");
+            document.getElementById("paymentPanel").classList.add("show");
             paymentPanelOpen = true;
         }
     }
-    
     function showWechatPanel() {
-        if(wechatPanelOpen) {
+        if(wechatPanelOpen) closeAllPanels();
+        else {
             closeAllPanels();
-        } else {
-            closeAllPanels();
-            const panel = document.getElementById("wechatPanel");
-            const wechatImg = document.getElementById("wechatQrImg");
-            wechatImg.src = wechatFriendQR;
-            wechatImg.onerror = function() { this.src = "https://picsum.photos/id/26/200/200"; };
-            panel.classList.add("show");
+            document.getElementById("wechatPanel").classList.add("show");
             wechatPanelOpen = true;
         }
     }
 
-    // 页面加载与防篡改轮询
     window.onload = () => {
-        initCategoryEvents();
-        
-        // 搜索事件绑定
-        const searchBtn = document.getElementById("searchBtn");
-        const searchInput = document.getElementById("searchInput");
-        searchBtn.addEventListener("click", performSearch);
-        searchInput.addEventListener("keypress", (e) => {
-            if(e.key === "Enter") performSearch();
+        document.querySelectorAll(".cat-btn").forEach(btn => {
+            btn.addEventListener("click", () => switchCategory(btn.dataset.cat));
         });
+        document.querySelector(".cat-btn[data-cat='all']").classList.add("active");
         
-        // 点击搜索信息清空搜索
-        const searchInfoDiv = document.getElementById("searchInfo");
-        if(searchInfoDiv) {
-            searchInfoDiv.addEventListener("click", () => {
-                if(currentSearchKeyword !== "") {
-                    clearSearchAndReset();
-                } else if(currentCategory !== "all") {
-                    // 如果无搜索但分类不是全部，点击清空重置到全部分类（方便浏览）
-                    switchCategory("all");
-                } else {
-                    // 已经是全部且无搜索，刷新或重新渲染
-                    renderProductGrid();
-                }
-            });
-        }
+        document.getElementById("searchBtn").onclick = performSearch;
+        document.getElementById("searchInput").onkeypress = (e) => { if(e.key === "Enter") performSearch(); };
+        document.getElementById("searchInfo").onclick = () => {
+            if(currentSearchKeyword) {
+                currentSearchKeyword = "";
+                document.getElementById("searchInput").value = "";
+                renderProductGrid();
+            } else if(currentCategory !== "all") switchCategory("all");
+        };
         
-        // 底部按钮
         document.getElementById("paymentCodeBtn").onclick = showPaymentPanel;
         document.getElementById("wechatFriendBtn").onclick = showWechatPanel;
-        
-        // 关闭面板按钮
         document.getElementById("closePaymentBtn").onclick = closeAllPanels;
         document.getElementById("closeWechatBtn").onclick = closeAllPanels;
         
-        // 模态框关闭
-        const modal = document.getElementById("infoModal");
-        const closeModalBtn = document.getElementById("closeModalBtn");
-        closeModalBtn.onclick = () => { modal.style.display = "none"; };
-        window.onclick = (e) => {
-            if(e.target === modal) modal.style.display = "none";
-            if(!e.target.closest(".side-panel") && !e.target.closest(".float-btn")) closeAllPanels();
-        };
+        const modal = document.getElementById("detailModal");
+        document.getElementById("closeDetailBtn").onclick = () => modal.classList.remove("show");
+        modal.onclick = (e) => { if(e.target === modal) modal.classList.remove("show"); };
+        window.onclick = (e) => { if(!e.target.closest(".side-panel") && !e.target.closest(".float-btn")) closeAllPanels(); };
         
-        // 防篡改保护：定期检查收款码是否被恶意篡改
-        setInterval(() => {
-            const qrDisplay = document.getElementById("paymentQrImg");
-            if(qrDisplay && qrDisplay.src && !qrDisplay.src.includes(secureQRUrl) && !qrDisplay.src.includes("picsum") && paymentPanelOpen) {
-                qrDisplay.src = getProtectedQR();
-            }
-        }, 1200);
+        renderProductGrid();
     };
-
-	// ========== 图片懒加载（新增）==========
-function initLazyLoad() {
-    if ('IntersectionObserver' in window) {
-        let lazyImages = document.querySelectorAll('.product-img img');
-        let imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    let img = entry.target;
-                    let originalSrc = img.getAttribute('data-src');
-                    if (originalSrc) {
-                        img.src = originalSrc;
-                        img.removeAttribute('data-src');
-                    }
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        lazyImages.forEach(img => {
-            if (img.src && !img.src.includes('picsum') && !img.src.includes('data:image')) {
-                img.setAttribute('data-src', img.src);
-                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f3ede7"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23b29278" font-size="14"%3E🌿 加载中...%3C/text%3E%3C/svg%3E';
-                imageObserver.observe(img);
-            }
-        });
-    }
-}
-
-// 等待页面加载完成后初始化，并 hook 渲染函数
-window.addEventListener('load', () => {
-    initLazyLoad();
-});
-
-// 保存原函数
-const originalRender = renderProductGrid;
-renderProductGrid = function() {
-    originalRender.apply(this, arguments);
-    setTimeout(initLazyLoad, 50);
-};
-
 </script>
 </body>
 </html>
