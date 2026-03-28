@@ -19,7 +19,6 @@
             min-height: 100vh;
         }
 
-        /* 背景装饰保留 */
         body::before {
             content: '';
             position: fixed;
@@ -216,6 +215,13 @@
             color: #7b6858;
             margin: 0.4rem 0;
             line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
         }
         .price-row {
             display: flex;
@@ -300,16 +306,21 @@
             max-height: 85vh;
             border-radius: 32px;
             padding: 1.8rem;
-            border: 1px solid #e3d9cf;
+            border: 4px solid #8b694c;
             box-shadow: 0 25px 50px rgba(0,0,0,0.2);
             overflow-y: auto;
             position: relative;
             animation: slideUp 0.4s;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .detail-content::-webkit-scrollbar {
+            display: none;
         }
         .detail-close {
-            position: absolute;
+            position: sticky;
             top: 20px;
-            right: 24px;
+            float: right;
             background: #f0e7de;
             border: none;
             color: #4a2e23;
@@ -322,17 +333,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 1rem;
+            z-index: 10;
         }
         .detail-close:hover {
             background: #7b5a44;
             color: white;
             transform: rotate(90deg);
         }
+        .detail-content::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
         .detail-main {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin-top: 0.5rem;
+            clear: both;
+            border-top: none;
+            padding-top: 0;
         }
         .detail-gallery {
             flex: 1.2;
@@ -384,6 +405,10 @@
             color: #7b6858;
             line-height: 1.6;
             margin: 1rem 0;
+            display: block;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+            white-space: normal;
         }
         .detail-spec {
             background: #fef6ef;
@@ -430,6 +455,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .close-panel {
+            background: transparent;
+            border: none;
+            font-size: 1.6rem;
+            line-height: 1;
+            cursor: pointer;
+            color: white;
+            padding: 0;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .close-panel:hover {
+            opacity: 1;
+            transform: none;
+            background: transparent;
+            color: #ffddbb;
         }
         .panel-body {
             padding: 20px 16px;
@@ -478,6 +526,12 @@
             .side-panel { width: 280px; right: 16px; bottom: 90px; }
             .float-buttons { bottom: 16px; right: 16px; gap: 12px; }
             .float-btn { width: 48px; height: 48px; font-size: 1.2rem; }
+            .detail-close {
+                top: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -550,7 +604,6 @@
 </div>
 
 <script>
-    // 商品数据（带多图）
     const products = [
         { id:1, name:"玫瑰沉香", desc:"清新温雅、助眠安神，淡淡玫瑰花香融入沉香基底", price:800, unit:"380支/捆", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp", 
           images:["https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp","https://picui.ogmua.cn/s1/2026/03/24/69c1fa37d0e1f.webp"], 
@@ -595,10 +648,6 @@
 
     let currentCategory = "all";
     let currentSearchKeyword = "";
-
-    let secureQRUrl = "images/A.jpg";
-    const getProtectedQR = () => secureQRUrl;
-    const wechatFriendQR = "images/B.jpg";
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, (m) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
 
@@ -657,12 +706,11 @@
         const modal = document.getElementById("detailModal");
         const detailMain = document.getElementById("detailMain");
         
-        let currentMainImg = product.mainImage;
         const images = product.images || [product.mainImage];
         
         detailMain.innerHTML = `
             <div class="detail-gallery">
-                <img id="detailMainImg" class="detail-main-img" src="${currentMainImg}" alt="${escapeHtml(product.name)}">
+                <img id="detailMainImg" class="detail-main-img" src="${product.mainImage}" alt="${escapeHtml(product.name)}">
                 <div class="detail-thumbnails" id="detailThumbnails">
                     ${images.map((img, idx) => `
                         <img class="thumb-img ${idx === 0 ? 'active' : ''}" data-src="${img}" src="${img}" alt="缩略图">
