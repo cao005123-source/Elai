@@ -317,10 +317,11 @@
         .detail-content::-webkit-scrollbar {
             display: none;
         }
+        /* 关闭按钮 - 使用 fixed 定位相对于弹窗容器，实现滚动时始终固定在右上角 */
         .detail-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
+            position: sticky;
+            top: 0;
+            float: right;
             background: #f0e7de;
             border: none;
             color: #4a2e23;
@@ -333,6 +334,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-left: auto;
+            margin-bottom: 0;
+            flex-shrink: 0;
             z-index: 20;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
@@ -341,12 +345,16 @@
             color: white;
             transform: rotate(90deg);
         }
+        /* 清除浮动并确保内容正常显示 */
+        .detail-content {
+            display: flex;
+            flex-direction: column;
+        }
         .detail-main {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
-            margin-top: 0;
-            padding-top: 0;
+            margin-top: 0.5rem;
         }
         .detail-gallery {
             flex: 1.2;
@@ -521,8 +529,6 @@
             .float-buttons { bottom: 16px; right: 16px; gap: 12px; }
             .float-btn { width: 48px; height: 48px; font-size: 1.2rem; }
             .detail-close {
-                top: 12px;
-                right: 12px;
                 width: 34px;
                 height: 34px;
                 font-size: 1.2rem;
