@@ -53,6 +53,14 @@
             letter-spacing: 4px;
             font-weight: 500;
         }
+        .hero-logo {
+            height: 3rem;
+            width: auto;
+            max-height: 3rem;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+        }
         .hero .sub {
             font-size: 1rem;
             color: #7a5e4c;
@@ -522,8 +530,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 680px) {
-            .hero h1 img { height: 1.8rem; }
             .hero h1 { font-size: 1.5rem; }
+            .hero-logo { height: 1.8rem; max-height: 1.8rem; }
             .detail-main { flex-direction: column; gap: 1.2rem; }
             .thumb-img { width: 55px; height: 55px; }
             .side-panel { width: 280px; right: 16px; bottom: 90px; }
