@@ -325,7 +325,6 @@
         .detail-content::-webkit-scrollbar {
             display: none;
         }
-        /* 关闭按钮 - 使用 fixed 定位相对于弹窗容器，实现滚动时始终固定在右上角 */
         .detail-close {
             position: sticky;
             top: 0;
@@ -353,7 +352,6 @@
             color: white;
             transform: rotate(90deg);
         }
-        /* 清除浮动并确保内容正常显示 */
         .detail-content {
             display: flex;
             flex-direction: column;
@@ -552,7 +550,7 @@
 <div class="container">
     <div class="hero">
         <h1>
-            <img src="logo.webp" class="hero-logo" alt="Elai Oud Logo">
+            <img src="logo.webp" class="hero-logo" alt="Elai Oud Logo" onerror="this.style.display='none'">
             一莱沉香 · 甄选香品
         </h1>
         <div class="sub">灵犀一缕，幽玄清雅 | 源自天然沉香</div>
@@ -614,13 +612,12 @@
     <div class="detail-content">
         <button class="detail-close" id="closeDetailBtn">✕</button>
         <div class="detail-main" id="detailMain">
-            <!-- 动态填充详情内容 -->
         </div>
     </div>
 </div>
 
 <script>
-    const products = [
+    const originalProducts = [
         { id:1, name:"玫瑰沉香", desc:"玫瑰龙涎型，香气清雅迷荡的甜香，香能行气，芳香诸品，清而不浊，和而不猛，空灵而柔雅的绽放着柔美的气息。", price:800, unit:"380支/捆", category:"incense",
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/j04W/0X0/0023.webp/webp", 
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/j04W/0X0/0023.webp/webp",
@@ -821,109 +818,109 @@
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/lBqR/0X0/0210.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/1OCv/0X0/0211.webp/webp"],
           specs:"【数量】10片/捆（独立包装）\n·【点燃时长】每片60分钟左右\n· 【储存】防潮、防异味、越存越醇\n· 【成份】红土沉香粉 " },
-        { id:33, name:"富森红土 • 小云朵", desc:"千年沉香，万年红土。富森红土选用富森红土老料，香韵中正，醇厚，瓜蜜里凉甜层次分明。香气的扩散性和留香都非普通级别沉香可比。安神静气效果最佳，是极致的睡眠伴侣。", price:380, unit:"/筒", category:"incense", mainImage:"https://picui.ogmua.cn/s1/2026/04/04/69d104244e9bd.webp", 
-          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/UmXb/0X0/0086.webp/webp",
+        { id:33, name:"富森红土 • 小云朵", desc:"千年沉香，万年红土。富森红土选用富森红土老料，香韵中正，醇厚，瓜蜜里凉甜层次分明。香气的扩散性和留香都非普通级别沉香可比。安神静气效果最佳，是极致的睡眠伴侣。", price:380, unit:"/筒", category:"incense", 
+         mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/UmXb/0X0/0086.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/UmXb/0X0/0086.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/DMsB/0X0/0065.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/zxAY/0X0/0064.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/fDLr/0X0/0062.webp/webp"],
           specs:"【数量】17片/捆（独立包装）\n·【点燃时长】每片35分钟左右\n· 【储存】防潮、防异味、越存越醇\n· 【成份】红土沉香粉 " },
-        { id:33, name:"天然沉香 • 小云朵", desc:"纯沉香味，凉甜柔蜜，花香果香柔和不呛", price:180, unit:"/筒", category:"incense", 
+        { id:34, name:"天然沉香 • 小云朵", desc:"纯沉香味，凉甜柔蜜，花香果香柔和不呛", price:180, unit:"/筒", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/ZPdm/0X0/0087.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/ZPdm/0X0/0087.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/yHRL/0X0/0069.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/VqvM/0X0/0068.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/vDz8/0X0/0066.webp/webp"],
           specs:"【数量】17片/捆（独立包装）\n·【点燃时长】每片35分钟左右\n· 【储存】防潮、防异味、越存越醇\n· 【适宜场所】家居、办公室、茶馆、佛堂、会所等 \n·【功效】安神舒心，驱邪祛燥，净化空气，静心养生。 " },
-        { id:34, name:"海南沉香", desc:"纯沉香味，凉甜柔蜜，花香果香柔和不呛", price:600, unit:"680支/捆", category:"incense", 
+        { id:35, name:"海南沉香", desc:"纯沉香味，凉甜柔蜜，花香果香柔和不呛", price:600, unit:"680支/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/Rzia/0X0/0070.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/Rzia/0X0/0070.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/eQFk/0X0/0071.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/aF15/0X0/0072.webp/webp"],
           specs:"【规格】1.6mm*21cm\n·【克重】200克/捆（约680支左右）\n·【点燃时长】每根35分钟左右\n· 【储存】防潮、防异味、越存越醇\n· 【功效】安神舒心，驱邪祛燥，净化空气，静心养生" },
-        { id:35, name:"降真香", desc:"香味清甜醇和：降真香的韵味以甜味为主，可视为香韵的基调，这种甜味并非浓烈刺鼻，而是清甜宜人，仿佛能沁人心脾，给人带来愉悦的嗅觉体验。香气类型丰富：降真香有“一藤五香”之说，包含花香、蜜香、麝香、兰花香、降香、果香、乳香、药香等多种香气。降真香是一种传统中药材，在传统医学中被认为具有行气活血、止痛、止血等功效。", price:380, unit:"310支/捆", category:"incense", 
+        { id:36, name:"降真香", desc:"香味清甜醇和：降真香的韵味以甜味为主，可视为香韵的基调，这种甜味并非浓烈刺鼻，而是清甜宜人，仿佛能沁人心脾，给人带来愉悦的嗅觉体验。香气类型丰富：降真香有“一藤五香”之说，包含花香、蜜香、麝香、兰花香、降香、果香、乳香、药香等多种香气。降真香是一种传统中药材，在传统医学中被认为具有行气活血、止痛、止血等功效。", price:380, unit:"310支/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/N8b7/0X0/0084.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/CA4o/0X0/0082.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/Qlsp/0X0/0083.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/N8b7/0X0/0084.webp/webp"],
           specs:"【规格】1.7mm*21cm\n·【克重】100克/捆（约300支左右）\n·【点燃时长】每根35分钟左右(无风环境下)\n·" },
-        { id:36, name:"海南黑棋手工香", desc:"静心、安神、促睡眠、净化空气,精挑细选每块材料，保证其香韵，蜜香甜凉，棋韵独特，气力强大！香韵纯正，爆发力与穿透力惊人！留香时间长，主要特点就是拥有极强的甘甜韵味", price:4000, unit:"90支/捆", category:"incense", 
+        { id:37, name:"海南黑棋手工香", desc:"静心、安神、促睡眠、净化空气,精挑细选每块材料，保证其香韵，蜜香甜凉，棋韵独特，气力强大！香韵纯正，爆发力与穿透力惊人！留香时间长，主要特点就是拥有极强的甘甜韵味", price:4000, unit:"90支/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/P6He/0X0/0097.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/P6He/0X0/0097.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/0H3A/0X0/0096.webp/webp"],
           specs:"【规格】3.0mm*21cm\n·【克重】100克/捆（约90支左右）\n·【点燃时长】每根90分钟左右(无风环境下)\n·【成份】黑棋楠沉香粉、植物粘粉" },
-        { id:37, name:"沉香苹果珠手串", desc:"静心、安神、促睡眠、净化空气,精挑细选每块材料，保证其香韵，蜜香甜凉，棋韵独特，气力强大！香韵纯正，爆发力与穿透力惊人！留香时间长，主要特点就是拥有极强的甘甜韵味", price:680, unit:"9mm", category:"bracelet", 
+        { id:38, name:"沉香苹果珠手串", desc:"静心、安神、促睡眠、净化空气,精挑细选每块材料，保证其香韵，蜜香甜凉，棋韵独特，气力强大！香韵纯正，爆发力与穿透力惊人！留香时间长，主要特点就是拥有极强的甘甜韵味", price:680, unit:"9mm", category:"bracelet", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/rta6/0X0/0098.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/rta6/0X0/0098.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/jJNU/0X0/0099.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/dAjn/0X0/0100.webp/webp"],
           specs:"珠径尺寸：9mm+\n·" },
-        { id:38, name:"芽庄打卷香", desc:"果甜凉明显、香气柔顺、蜜甜", price:38000, unit:"920支/捆", category:"incense", 
+        { id:39, name:"芽庄打卷香", desc:"果甜凉明显、香气柔顺、蜜甜", price:38000, unit:"920支/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/nFtu/0X0/0104.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/nFtu/0X0/0104.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/XTAp/0X0/0101.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/HINJ/0X0/0102.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/9lSh/0X0/0103.webp/webp"],
           specs:"【规格】1.2mm*21cm\n·【克重】200克/捆（约940支左右）\n·【点燃时长】每根40分钟左右(无风环境下)\n·【用途】清心除烦、净化空气、舒缓情绪、除湿除味" },
-        { id:39, name:"海南​沉‎香盘香", desc:"花甜​蜜香，沉香具有​防​疫‎、净​化空气‎、驱​疾​避邪‎；还‎有​开​窍通‎灵​、养‎生​养神‎，增​强人‎体‎免疫​的​功‎效‎。可​用​场‎所：会‎所​，佛‎堂‎，课室，办‎公​室，客厅，房间，素​食​馆等‎", price:380, unit:"38片/盒", category:"incense", 
+        { id:40, name:"海南​沉‎香盘香", desc:"花甜​蜜香，沉香具有​防​疫‎、净​化空气‎、驱​疾​避邪‎；还‎有​开​窍通‎灵​、养‎生​养神‎，增​强人‎体‎免疫​的​功‎效‎。可​用​场‎所：会‎所​，佛‎堂‎，课室，办‎公​室，客厅，房间，素​食​馆等‎", price:380, unit:"38片/盒", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/eQGy/0X0/0214.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/eQGy/0X0/0214.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/yPuC/0X0/0213.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/cUdX/0X0/0215.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/pU68/0X0/0212.webp/webp"],
           specs:"【规格】50克/盒（约38片）\n·【成份】海南沉香粉、植物粘粉\n·【点燃时长】2小时/单片\n·【产地】海南" },
-        { id:40, name:"鹅梨帐中香盘香", desc:"‎初闻，带有梨汁的清甜，万般诱人。渐渐地，沉香、檀香的香味散发出来，暗香浮动。睡前熏上一炉，也许在梦里会遇到李煜的春花秋月吧。一缕馨香，梦回千年。", price:480, unit:"40片/盒", category:"incense", 
+        { id:41, name:"鹅梨帐中香盘香", desc:"‎初闻，带有梨汁的清甜，万般诱人。渐渐地，沉香、檀香的香味散发出来，暗香浮动。睡前熏上一炉，也许在梦里会遇到李煜的春花秋月吧。一缕馨香，梦回千年。", price:480, unit:"40片/盒", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/aG6E/0X0/0216.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/aG6E/0X0/0216.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/bQbJ/0X0/0218.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/JHdG/0X0/0217.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/x8qF/0X0/0219.webp/webp"],
           specs:"【规格】50克/盒（约40片）\n·【成份】海南沉香粉、温脖、老山檀香粉\n·【点燃时长】2小时/单片\n·" },
-        { id:41, name:"黑棋沉水马型无粘粉香", desc:"奇韵正、香味浓郁、花香蜜凉、果香，采用6年以上海南沉水黑棋楠老料+国香老顶调配而成、嗅觉上的盛宴‎", price:180, unit:"10片/盒", category:"incense", 
+        { id:42, name:"黑棋沉水马型无粘粉香", desc:"奇韵正、香味浓郁、花香蜜凉、果香，采用6年以上海南沉水黑棋楠老料+国香老顶调配而成、嗅觉上的盛宴‎", price:180, unit:"10片/盒", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/l550/0X0/0220.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/l550/0X0/0220.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/hHFa/0X0/0221.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/TH8N/0X0/0222.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/Hrlf/0X0/0223.webp/webp"],
           specs:"【规格】1捆10片/1克一片\n·【成份】海南沉水黑棋楠老料+国香老顶调配而成\n·【点燃时长】100分钟/单片\n·" },
-        { id:42, name:"沉香圆珠手串", desc:"品相好，油脂高，原汁原味。男士女士都合适配带‎", price:680, unit:"10mm", category:"bracelet", 
+        { id:43, name:"沉香圆珠手串", desc:"品相好，油脂高，原汁原味。男士女士都合适配带‎", price:680, unit:"10mm", category:"bracelet", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/CZXf/0X0/0224.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/CZXf/0X0/0224.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/ZVnj/0X0/0225.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/dBuv/0X0/0226.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/jQ1y/0X0/0227.webp/webp"],
           specs:"珠径尺寸：10mm\n· 克重：7克+ " },
-        { id:43, name:"莲花沉香线香", desc:"清新淡雅：既带有莲花的清新、淡雅，又有沉香的醇厚、沉稳，整体味道柔和‎", price:2000, unit:"200克/捆", category:"incense", 
+        { id:44, name:"莲花沉香线香", desc:"清新淡雅：既带有莲花的清新、淡雅，又有沉香的醇厚、沉稳，整体味道柔和‎", price:2000, unit:"200克/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/2paI/0X0/0228.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/2paI/0X0/0228.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/QfUP/0X0/0229.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/ClA3/0X0/0230.webp/webp"],
           specs:"【规格】1.5mm*21cm\n·【成份】选用莲子、荷花、花蕊、海南虫漏、天然植物粘粉、纯净水等作为原料\n·【点燃时长】每根大约可燃45分左右！\n·【克重】200克/捆，约800根" },
-        { id:44, name:"特级鹅梨帐中香", desc:"清甜，带微蜜感，清透不齁，奶香、蜜润余韵裹着沉稳的木质底，留香绵长，烟气干净不呛‎", price:2800, unit:"680支/捆", category:"incense", 
+        { id:45, name:"特级鹅梨帐中香", desc:"清甜，带微蜜感，清透不齁，奶香、蜜润余韵裹着沉稳的木质底，留香绵长，烟气干净不呛‎", price:2800, unit:"680支/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/4hcr/1080X1440/0231.jpg/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/4hcr/1080X1440/0231.jpg/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/f1VD/1080X1440/0232.jpg/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/uQ4x/1080X1440/0234.jpg/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/9fy0/1080X1440/0233.jpg/webp"],
           specs:"【规格】1.5mm*21cm\n·【成份】特级鹅梨粉、植物粘粉\n·【燃烧时间】：每根35分钟（无风环境）\n·【储存】防潮、防异味、越久越醇\n·【克重】200克/捆（约680支左右）\n·【特点】静心、舒缓、体感柔和：近闻不冲，远闻雅致，适合帐中、卧室，有助安神舒缓；余韵悠长、不熏人、" },
-        { id:45, name:"水果沉香线香", desc:"具有明显的水果香气，如草莓味的香甜、柠檬味的清新酸爽、水蜜桃味的甜蜜芬芳等，能给人带来愉悦的嗅觉体验，仿佛置身于水果园中‎", price:2000, unit:"800支/捆", category:"incense", 
+        { id:46, name:"水果沉香线香", desc:"具有明显的水果香气，如草莓味的香甜、柠檬味的清新酸爽、水蜜桃味的甜蜜芬芳等，能给人带来愉悦的嗅觉体验，仿佛置身于水果园中‎", price:2000, unit:"800支/捆", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/R8Ka/0X0/0235.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/R8Ka/0X0/0235.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/NZhG/0X0/0236.webp/webp"],
           specs:"【规格】1.5mm*21cm\n·【成份】天然沉香原料，加水果🍉……，植物粘粉，\n·【燃烧时间】：每根45分钟（无风环境）\n·【储存】防潮、防异味、越久越醇\n·【克重】200克/捆（约680支左右）\n·【特点】点燃后，线香燃烧均匀，烟雾轻盈，能在室内营造出温馨、舒适且带有果香的氛围，有助于放松身心、缓解压力。" },
-        { id:46, name:"虎斑棋手工香", desc:"‎静心、安神、促睡眠、净化空气,精挑细选每块材料，保证其香韵，蜜香甜凉，棋韵迷人，气力强大！香韵纯正，爆发力与穿透力惊人！留香时间长，主要特点就是拥有极强的甘甜韵味。", price:580, unit:"10克/管", category:"incense", 
+        { id:47, name:"虎斑棋手工香", desc:"‎静心、安神、促睡眠、净化空气,精挑细选每块材料，保证其香韵，蜜香甜凉，棋韵迷人，气力强大！香韵纯正，爆发力与穿透力惊人！留香时间长，主要特点就是拥有极强的甘甜韵味。", price:580, unit:"10克/管", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/AvDE/1080X1440/0237.jpg/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/AvDE/1080X1440/0237.jpg/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/Av0d/1080X1440/0238.jpg/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/QI59/1080X1440/0239.jpg/webp"],
           specs:"【规格】2mm*21cm\n·【成份】虎斑棋沉香粉、植物粘粉\n·【点燃时长】每根大约可燃60分左右\n·" },
-        { id:47, name:"棋楠手工香", desc:"前调具有强烈的爆发力，能瞬间激活嗅觉，给人一种清凉、甘甜或者果蜜般的香气，穿透力极强。\n中调：香气会逐渐转化为醇厚、馥郁的奶香、花香或者杏仁味，也可能是花粉蜜香交织。\n尾调：余韵悠长，带有淡淡的木质香，沉稳内敛，还可能留存一丝甜凉和洁净感，冷嗅香灰仍有清幽甜韵。‎", price:680, unit:"10克/管", category:"incense", 
+        { id:48, name:"棋楠手工香", desc:"前调具有强烈的爆发力，能瞬间激活嗅觉，给人一种清凉、甘甜或者果蜜般的香气，穿透力极强。\n中调：香气会逐渐转化为醇厚、馥郁的奶香、花香或者杏仁味，也可能是花粉蜜香交织。\n尾调：余韵悠长，带有淡淡的木质香，沉稳内敛，还可能留存一丝甜凉和洁净感，冷嗅香灰仍有清幽甜韵。‎", price:680, unit:"10克/管", category:"incense", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/eHNQ/0X0/0241.webp/webp",
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/eHNQ/0X0/0241.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/fm1n/0X0/0240.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/ItDd/0X0/0242.webp/webp"],
           specs:"【规格】1.8mm*21cm\n·【成份】棋楠沉香粉、山水、植物粘粉\n·【点燃时长】每根60分钟左右（无风情况下）\n·【克重】10克/管（约24支左右）" },
-        { id:48, name:"海南天然沉香精油", desc:"2019年蒸馏提练。不但在香气上体现，还有很好的药用价值！味韵层次丰富，香感干净甜美中透凉！一滴沉香油，大自然的花香夹着淡淡的甘甜蜜香，清新自然，香味怡人沁脾，蜜甜雅韵，其香久远，沁人心脾，魅力无穷！香味持久长达8小时以上，还是一款有药效的沉香精油！", price:880, unit:"/瓶", category:"other", 
+        { id:49, name:"海南天然沉香精油", desc:"2019年蒸馏提练。不但在香气上体现，还有很好的药用价值！味韵层次丰富，香感干净甜美中透凉！一滴沉香油，大自然的花香夹着淡淡的甘甜蜜香，清新自然，香味怡人沁脾，蜜甜雅韵，其香久远，沁人心脾，魅力无穷！香味持久长达8小时以上，还是一款有药效的沉香精油！", price:880, unit:"/瓶", category:"other", 
          mainImage:"https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/k8X7/0X0/0246.webp/webp", 
           images:["https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/k8X7/0X0/0246.webp/webp",
                   "https://img.51shazhu.com/autoupload/nWUgnqN5TnYrRR2ZFdGBMifNcKcqEnRmcljopnyJoMs/20260411/Iu6o/0X0/0243.webp/webp",
@@ -935,33 +932,77 @@
 
     let currentCategory = "all";
     let currentSearchKeyword = "";
+    let randomizedAllProducts = [];
+    function shuffleArray(arr) {
+        const array = [...arr];
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function getDailyShuffledProducts() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const dateSeed = `${year}-${month}-${day}`;
+        
+        let seed = 0;
+        for (let i = 0; i < dateSeed.length; i++) {
+            seed = (seed * 31 + dateSeed.charCodeAt(i)) % 1000000007;
+        }
+        
+        const seededShuffle = (arr, seedVal) => {
+            const result = [...arr];
+            let currentSeed = seedVal;
+            for (let i = result.length - 1; i > 0; i--) {
+                currentSeed = (currentSeed * 9301 + 49297) % 233280;
+                const rand = currentSeed / 233280;
+                const j = Math.floor(rand * (i + 1));
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+            return result;
+        };
+        
+        return seededShuffle(originalProducts, seed);
+    }
+
+    function getDisplayProducts() {
+        if (currentSearchKeyword && currentSearchKeyword.trim() !== "") {
+            const keyword = currentSearchKeyword.trim().toLowerCase();
+            return originalProducts.filter(p => p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword));
+        }
+        
+        if (currentCategory === "all") {
+            return randomizedAllProducts;
+        } else {
+            return originalProducts.filter(p => p.category === currentCategory);
+        }
+    }
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, (m) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
 
-    function getFilteredProducts() {
-        let filtered = [...products];
-        if(currentSearchKeyword.trim() !== "") {
-            const keyword = currentSearchKeyword.trim().toLowerCase();
-            filtered = filtered.filter(p => p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword));
-        } else if(currentCategory !== "all") {
-            filtered = filtered.filter(p => p.category === currentCategory);
-        }
-        return filtered;
-    }
-
     function renderProductGrid() {
-        const filtered = getFilteredProducts();
+        const displayList = getDisplayProducts();
         const grid = document.getElementById("productGrid");
         const searchInfoDiv = document.getElementById("searchInfo");
         
-        if(filtered.length === 0) {
+        if(displayList.length === 0) {
             grid.innerHTML = `<div style="text-align:center; padding:50px 20px; color:#b29278;">✨ 暂无香品 ✨</div>`;
             return;
         }
         
-        searchInfoDiv.innerHTML = currentSearchKeyword ? `🔍 “${escapeHtml(currentSearchKeyword)}” 共 ${filtered.length} 件` : `✨ 共 ${filtered.length} 款香品 · 点击清除`;
+        if(currentSearchKeyword && currentSearchKeyword.trim() !== "") {
+            searchInfoDiv.innerHTML = `🔍 “${escapeHtml(currentSearchKeyword)}” 共 ${displayList.length} 件`;
+        } else if(currentCategory !== "all") {
+            searchInfoDiv.innerHTML = `✨ 共 ${displayList.length} 款香品 · 点击清除`;
+        } else {
+            searchInfoDiv.innerHTML = `✨ 共 ${displayList.length} 款香品 (每日焕新) · 点击清除`;
+        }
         
-        grid.innerHTML = filtered.map(product => `
+        grid.innerHTML = displayList.map(product => `
             <div class="product-card" data-id="${product.id}">
                 <div class="product-img">
                     <img src="${product.mainImage}" alt="${escapeHtml(product.name)}" onerror="this.src='https://picsum.photos/id/1/300/200'">
@@ -983,7 +1024,8 @@
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', () => {
                 const productId = parseInt(card.dataset.id);
-                const product = products.find(p => p.id === productId);
+                // 从原始产品中查找，保证无论随机与否都能找到
+                const product = originalProducts.find(p => p.id === productId);
                 if(product) showProductDetail(product);
             });
         });
@@ -992,7 +1034,6 @@
     function showProductDetail(product) {
         const modal = document.getElementById("detailModal");
         const detailMain = document.getElementById("detailMain");
-        
         const images = product.images || [product.mainImage];
         
         detailMain.innerHTML = `
@@ -1043,6 +1084,7 @@
         renderProductGrid();
     }
     
+    // ---------- 切换分类 ----------
     function switchCategory(category) {
         currentSearchKeyword = "";
         document.getElementById("searchInput").value = "";
@@ -1078,6 +1120,8 @@
     }
 
     window.onload = () => {
+        randomizedAllProducts = getDailyShuffledProducts();
+        
         document.querySelectorAll(".cat-btn").forEach(btn => {
             btn.addEventListener("click", () => switchCategory(btn.dataset.cat));
         });
