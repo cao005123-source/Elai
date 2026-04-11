@@ -1012,7 +1012,7 @@
         } else if(currentCategory !== "all") {
             searchInfoDiv.innerHTML = `✨ 共 ${displayList.length} 款香品 · 点击清除`;
         } else {
-            searchInfoDiv.innerHTML = `✨ 共 ${displayList.length} 款香品 (每日焕新) · 点击清除`;
+            searchInfoDiv.innerHTML = `✨ 共 ${displayList.length} 款香品 · 点击清除`;
         }
         
         grid.innerHTML = displayList.map(product => `
@@ -1037,7 +1037,6 @@
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', () => {
                 const productId = parseInt(card.dataset.id);
-                // 从原始产品中查找，保证无论随机与否都能找到
                 const product = originalProducts.find(p => p.id === productId);
                 if(product) showProductDetail(product);
             });
